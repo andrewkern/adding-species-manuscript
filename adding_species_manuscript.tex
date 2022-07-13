@@ -1,5 +1,4 @@
-%%%%%%%%%%%% packages %%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[hidelinks]{article}
+\documentclass{article}
 \usepackage[letterpaper,margin=1.0in]{geometry}
 \usepackage[utf8]{inputenc}
 \pagenumbering{arabic}
@@ -12,6 +11,9 @@
 \usepackage{fancyhdr}
 \usepackage{longtable}
 \usepackage{booktabs}
+% hyperlinks
+\usepackage{hyperref}
+
 \usepackage{xspace}
 \usepackage{mathrsfs}
 
@@ -30,8 +32,7 @@
 \usepackage[round]{natbib}   % omit 'round' option if you prefer square brackets
 \bibliographystyle{plainnat}
 
-% hyperlinks
-\usepackage{hyperref}
+
 
 \newcommand{\Stdpopsim}{\texttt{Stdpopsim}\xspace}
 \newcommand{\stdpopsim}{\texttt{stdpopsim}\xspace}
@@ -185,8 +186,7 @@ unprecedented amounts and diversity of genomic data for a huge variety of specie
 \citep{Ellegren2014}. Ongoing efforts to systematically sequence life on
 Earth by efforts such as the Earth Biogenome \citep{Lewin2022} and its
 affiliated project networks (for example, Vertebrate Genomes
-\citep{Rhie2021}, 10,000 Plants \citep{Cheng2018} and others, see
-https://www.earthbiogenome.org/affiliated-project-networks) are
+\citep{Rhie2021}, 10,000 Plants \citep{Cheng2018} and others) are
 providing the backbone for enormous increases in population-level genomic data from
 new model and non-model species. Methods for inferring
 demographic history and natural selection from such data are also flourishing
@@ -257,7 +257,8 @@ This paper is intended as a resource for both methods
 developers and empirical researchers to develop simulations of their own
 species of interest, and perhaps even to submit the simulation
 framework for inclusion in the \stdpopsim catalog for community use.
-In the \textbf{Tutorial}, we discuss the elements of a
+In the \hyperref[sec:sim-guidelines]{Standardized genome-wide simulations}, 
+we discuss the elements of a
 population genomic simulation model that realistically characterizes a
 species, including when a whole-genome simulation is more useful than
 simulations based on either individual loci or generic loci.
@@ -269,9 +270,9 @@ necessary inputs. This paper is not intended as a tutorial for
 implementing simulations in any particular simulator, rather to provide
 guidance for what information is sufficient for a realistic genome simulation
 using any simulator, and how to add this information to \stdpopsim. The latter 
-is discussed in the \textbf{Application} section, where we lay out in
-detail the simpole process of incorporating the information discussed 
-in \textbf{Tutorial} into \stdpopsim. 
+is discussed in the \hyperref[sec:examples]{Examples} section, where we lay out in
+detail the simple process of incorporating the information discussed 
+in the \hyperref[sec:sim-guidelines]{Standardized genome-wide simulations} section into \stdpopsim. 
 
 
 
@@ -424,8 +425,8 @@ The concentrated effort to add species to the \texttt{\stdpopsim} catalog has le
 
 
 
-\hypertarget{sec4}{%
-	\section*{Guidelines for implementing a population genomic simulation}\label{sec:sim-guidelines}}
+\hypertarget{sec3}{
+\section*{Guidelines for implementing a population genomic simulation}\label{sec:sim-guidelines}}
 
 \colorbox{yellow}{[TODO: careful review of this section. Quite extensive edits since last version (Elise/Dan S/...?) ]}\vspace{1em}
  
@@ -579,7 +580,7 @@ other is not fully known. One way to deal with this situation is to include only
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
-\begin{table}[]
+\begin{table}[htb]
 	\captionof{table}{Guide to missing parameters. \\
 	%	
 	\colorbox{yellow}{[TODO: reconsider table. Either clarify considerations or just defer to the text, which covers this quite clearly.}
@@ -606,12 +607,12 @@ other is not fully known. One way to deal with this situation is to include only
 
 
 \hypertarget{sec5}{%
-	\section*{Examples of added species}\label{sec:std-sim}}
+	\section*{Examples of added species}\label{sec:examples}}
 
 In this section, we provide examples of two species recently added to the \texttt[\stdpopsim] catalog, to demonstrate the key considerations made in the process.
 
 \hypertarget{ano-gambea}{%
-	\subsection*{\texorpdfstring{\emph{Anopheles gambiae} (mosquito)}{Anopheles gambiae (mosquito)}}\label{bos-taurus}}
+	\subsection*{\texorpdfstring{\emph{Anopheles gambiae} (mosquito)}{Anopheles gambiae (mosquito)}}\label{AnoGam}}
 
 \colorbox{yellow}{[TODO: This section was completely rewritten based on examination of the codebase.}\\
 \colorbox{yellow}{This should be carefully reviewed (Andy?)]}
@@ -716,7 +717,7 @@ with estimates of effective population size around 90 in the early 1980s, which 
 \citep{MacLeod2013,MacLeod2014,Hartfield2022}. For these reasons, it was useful to develop a detailed simulation model for cattle to be added to the \texttt{\stdpopsim} catalog.
 
 We used the most recent assembly, ARS-UCD1.2
-\citep{Rosen2020}, a constant mutation rate \(\mu=1.2\times 10^{-8}\) for all chromosomes \citep{Harland2017}, and a constant recombination rate \(\rho=9.26 \times 10^{-9}\) for all chromosomes other than the mitochonrial genome \citep{Ma2015}.
+\citep{Rosen2020}, a constant mutation rate \(\mu=1.2\times 10^{-8}\) for all chromosomes \citep{Harland2017}, and a constant recombination rate \(\rho=9.26 \times 10^{-9}\) for all chromosomes other than the mitochondrial genome \citep{Ma2015}.
 %
 We set the effective population size to $Ne=62,000$, reflecting the ancestral population size before  domestication  \citep{MacLeod2013}.
 %
