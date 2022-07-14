@@ -259,7 +259,7 @@ species of interest, and perhaps even to submit the simulation
 framework for inclusion in the \stdpopsim catalog for community use.
 In the \hyperref[sec:sim-guidelines]{Guidelines section}, 
 we discuss the elements of a
-population genomic simulation model that realistically characterizes a
+population genomic simulation model that characterizes a
 species, including when a whole-genome simulation is more useful than
 simulations based on either individual loci or generic loci.
 We discuss the required input data (genome assembly, 
@@ -293,7 +293,28 @@ in the \hyperref[sec:sim-guidelines]{Standardized genome-wide simulations} secti
 \colorbox{yellow}{ (Elise/Peter?)]}
 	
 	
-The main objective of population genomic simulations is to capture as accurately as possible the patterns of sequence variation along the genome within a given population of interest. Most simulations do not assume a specific reference genome sequence, but that does not prevent them from realistically portraying patterns of variation. Modern simulation engines, such as \texttt{msprime} \citep{Kelleher2016,Nelson2020} and \texttt{SLiM} \citep{Haller2019}, are capable of producing realistic patterns of sequence variation if they are provided with accurate estimates for parameters describing the genome architecture and evolutionary history of the simulated species. These parameters describe numerous features, including the chromosome lengths,  mutation and recombination rates, the demographic history of the simulated population, and the landscape of natural selection along the genome. The growing availability of population genomic data has made it increasingly possible to apply computational methods to real genomic data in order to obtain decent estimates for the key parameters required for realistic simulations. Thus, the main challenge when setting up a population genomic simulation is to survey the literature for relevant studies that estimated these parameters, and then correctly plugging these parameter values into the appropriate simulation engine. This step often involves integrations between different literature sources and non-trivial conversions between different scales. As a result, while the simulations themselves may require considerable computation resources, the most time-consuming and error-prone part in population gemomic simulations is setting them up.
+The main objective of population genomic simulations is to capture as accurately as possible
+the patterns of sequence variation along the genome within a given population of interest.
+Most simulations do not assume a specific reference genome sequence, 
+but that does not prevent them from realistically portraying patterns of variation.
+Modern simulation engines, such as \texttt{msprime} \citep{Kelleher2016,Nelson2020} 
+and \texttt{SLiM} \citep{Haller2019}, are capable of producing realistic patterns of sequence variation
+if they are provided with accurate estimates for parameters describing the genome architecture
+and evolutionary history of the simulated species. 
+These parameters describe numerous features, including the number of chromosomes and their lengths,
+mutation and recombination rates, the demographic history of the simulated population,
+and, potentially, the landscape of natural selection along the genome. 
+The growing availability of population genomic data has made it increasingly possible
+to apply computational methods to real genomic data in order to obtain decent estimates
+for the key parameters required for realistic simulations. 
+Thus, a key challenge when setting up a population genomic simulation is to
+survey the literature for relevant studies that estimate these parameters, 
+and then correctly implementing these parameter values into an appropriate simulation engine.
+This step often involves integrations between different literature sources and
+non-trivial conversions between different scales.
+As a result, while the simulations themselves may require considerable computation resources,
+the potentially most time-consuming and error-prone part in population genomic simulation is
+implementation.
 
 
 The main objective of \texttt{\stdpopsim} is to standardize this process as much as possible.
