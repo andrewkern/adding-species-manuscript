@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[hidelinks]{article}
 \usepackage[letterpaper,margin=1.0in]{geometry}
 \usepackage[utf8]{inputenc}
 \pagenumbering{arabic}
@@ -257,7 +257,7 @@ This paper is intended as a resource for both methods
 developers and empirical researchers to develop simulations of their own
 species of interest, and perhaps even to submit the simulation
 framework for inclusion in the \stdpopsim catalog for community use.
-In the \hyperref[sec:sim-guidelines]{Standardized genome-wide simulations}, 
+In the \hyperref[sec:sim-guidelines]{Guidelines section}, 
 we discuss the elements of a
 population genomic simulation model that realistically characterizes a
 species, including when a whole-genome simulation is more useful than
@@ -617,15 +617,18 @@ In this section, we provide examples of two species recently added to the \textt
 \colorbox{yellow}{[TODO: This section was completely rewritten based on examination of the codebase.}\\
 \colorbox{yellow}{This should be carefully reviewed (Andy?)]}
 
-Anopheles gambiae, also known as the African malaria mosquito, is a good example of a non-model organism whose population history has direct implications on human health. Several large scale studies in the recent years have provided information about the population history of this species, on which population genomic simulations can be based \citep{Pombi2006,Miles2017} \colorbox{yellow}{[TODO: add more citations? (Andy?)]}. The simulation model for this species is based on the AgamP4 genome assembly \citep{Sharakhova2007}. The lengths of each of the six chromosomes, including a sex chromosome and the mitochondrial genome, were downloaded directly from Ensembl \citep{ensembl2021}.
-The \texttt{\stdpopsim} repository has several utilities that interact with Ensembl, making it easy to accurately retrieve basic genome information and construct the appropriate python data structures.
-%
-%A partial list of the
-%genomes housed on Ensembl can be found at
-%https://metazoa.ensembl.org/species.html. (DRS: this is kinda just floating here.)
-%
-Estimates of average recombination rates for each of the five chromosomes (excluding the mitochondrial genome) were taken from a recombination map inferred by \cite{Pombi2006}.
-%
+Anopheles gambiae, also known as the African malaria mosquito, is a good example
+of a non-model organism whose population history has direct implications on human health.
+Several large scale studies in the recent years have provided information about the
+population history of this species, on which population genomic simulations can be based \citep[e.g.,][]{Miles2017, clarkson2020genome}
+The physical genome for this species is based on the AgamP4 genome assembly \citep{Sharakhova2007}. 
+The lengths of each of the six chromosomes, including a sex chromosome and the mitochondrial genome, 
+were downloaded directly from Ensembl \citep{ensembl2021}.
+The \texttt{\stdpopsim} repository has several utilities that interact with Ensembl, 
+making it easy to accurately retrieve basic genome information and construct the appropriate python data structures.
+Estimates of average recombination rates for each of the five chromosomes (excluding the mitochondrial genome) 
+were taken from a recombination map inferred by \cite{Pombi2006}.
+
 
 \colorbox{yellow}{[TODO:  maybe add table similar to the one in the docs]} 
 %\href{https://popsim-consortium.github.io/\stdpopsim-docs/latest/catalog.html#sec_catalog_AnoGam_genome}{[table link]}
