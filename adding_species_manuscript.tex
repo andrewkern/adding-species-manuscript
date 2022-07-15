@@ -275,9 +275,14 @@ detail the simple process of incorporating the information discussed
 in the \hyperref[sec:sim-guidelines]{Standardized genome-wide simulations} section into \stdpopsim. 
 
 
+%% Andy: I'm going to try a bit of a bolder approach here towards centering
+% stdopsim. Currently as it's written we are vascilating between generalities and
+% spcifics for inclusion into stdpopsim, so i'm going to try to make it more about stdpopsim
+% and see how it fits
+
 
 \hypertarget{sec2}{%
-	\section*{Standardized genome-wide simulations}\label{sec:std-sim}}
+	\section*{Why standardized genome-wide simulations?}\label{sec:std-sim}}
 
 
 
@@ -292,7 +297,7 @@ in the \hyperref[sec:sim-guidelines]{Standardized genome-wide simulations} secti
 	provide a fundamental overview of popgen simulations}\\
 \colorbox{yellow}{ (Elise/Peter?)]}
 	
-	
+\paragraph*{Parameterization is hard}	
 The main objective of population genomic simulations is to capture as accurately as possible
 the patterns of sequence variation along the genome within a given population of interest.
 Most simulations do not assume a specific reference genome sequence, 
@@ -312,11 +317,11 @@ survey the literature for relevant studies that estimate these parameters,
 and then correctly implementing these parameter values into an appropriate simulation engine.
 This step often involves integrations between different literature sources and
 non-trivial conversions between different scales.
-As a result, while the simulations themselves may require considerable computation resources,
-the potentially most time-consuming and error-prone part in population genomic simulation is
-implementation.
+As a result, while the simulations themselves may require considerable computational resources,
+the potentially most time-consuming and error-prone part of population genomic simulation is
+correctly parameterizing simulation software.
 
-
+\paragraph*{\Stdpopsim fixes this}
 The main objective of \texttt{\stdpopsim} is to standardize this process as much as possible.
 %, focusing on the first two steps of curating the relevant literature and applying 
 % parameters correctly to the simulation software.
@@ -333,41 +338,43 @@ Therefore, this quality control considerably increases the reliability of the
 resulting simulations in any downstream analysis.
 
 
-
-One of the things we advocate in \texttt{\stdpopsim} is simulation of complete
-chromosomes. Such simulations are typically more complex because they require
-setting many parameters pertaining to genome structure, and they require
-considerable computational resources. Because of this, most simulations carried
-out for individual studies avoid simulating complete chromosomes and resort to
-separate simulations of many short segments. While this results in simpler
-simulations that can be executed concurrently, % and thus much more efficiently, 
-simulations of short segments ignore the structure of physical linkage along
-chromosome. This linkage affects patterns of variation in subtle ways, which could
-have significant influence on different aspects of downstream population genetic
-analysis \citep{Nelson2020}. 
-
-
-\noindent\colorbox{yellow}{[ TODO: check that the main arguments are clearly covered below (Andy/Peter?)]}
-
-First, the correlation between different sites along a chromosome reduces
-variation. This has a particularly striking effect in long stretches of
-low recombination rates, as observed on the long arm of human chromosome 22 \citep{Dawson2002}.
+\paragraph*{%
+  \textbf{Species-specific genomic architecture is challenging to model}}
+The organization of genes on chromosomes is a key feature of a species' genome,
+and one that has largely been ignored in population genetic simulation (see XXX for notable exceptions).
+While this is so simulation of chromosome length sequences, say $ > 10^7$ bp, 
+has until very recently been largely out of reach computationally
+and so population genetics have resorted to separate simulations of many short segments
+of the genome
+   
+The goal of complete chromosome simulation is important for a number of reasons.
+First, physical linkage of chromosomes induces correlations along a chromosome that
+reduce variance, generally, relative to independent simulations of equivalenet genetic material.
+This has a particularly striking effect in long stretches of low recombination rates,
+as observed of instance on the long arm of human chromosome 22 \citep{Dawson2002}.
 Second, the lengths of shared haplotypes within and
 between populations provides valuable information about recent demographic history.
-Methods that use such information, such as MSMC \citep{Schiffels2020}, require as
-input very long genomic segments, with realistic recombination rates.
+Methods that use such information, such as MSMC \citep{Schiffels2020}, perform best
+on long genomic segments, with realistic recombination rates.
 Thus, even when conducting simulations under neutral evolution, short segments
 would not be able to capture important features observed in neutral regions of
 real genome sequences, such as long-range linkage disequilibrium.
 %
 When conducting simulations with natural selection, linkage has
-an even stronger effect. Selection acting on a small number of sites drives down
-genetic variation in nearby sites. This has been argued to be one of the causes
-for the observed correlation between recombination rate and genetic diversity
-\citep{Begun1992}. Selection at linked sites has been shown to have a widespread
-effect on patterns of genome variation in different species \citep{McVicker2009,Charlesworth2012}. This effect tends to be stronger in species
-with smaller effective population sizes, but recent selective sweeps can dramatically
-reduce variation even in species with large population sizes \citep{Lynd2010}.
+an even stronger effect. Selection acting on a small number of sites can
+indirectly influence levels and patterning of genetic variation at linked
+neutral sites. While the relative strengths of different modes of selection
+may still be debated \citep{kern2018neutral,jensen2019importance}, 
+selection at linked sites has been shown to have a widespread
+effect on patterns of genome variation in myriad species
+\citep[e.g.,][]{McVicker2009,Charlesworth2012}.
+
+\paragraph*{\Stdpopsim fixes this}
+By design, \texttt{\stdpopsim} simulates complete chromosomes (or contigs),
+based on asseblies of references genomes that are publicly available. 
+This means that the simulation engine can be used to simulate any species'
+genomic architecture, provided a reference genome. 
+
 %
 % ILAN: commented out this part on genetic load. We can mention this briefly,
 %   if we think it's important
@@ -388,14 +395,18 @@ reduce variation even in species with large population sizes \citep{Lynd2010}.
 
 \noindent\colorbox{yellow}{[ TODO: elaborate on example of Hsieh, et al. below (Ryan?) ]}
 
-Finally, the whole genome sequence can provide important comparative
-data with which to evaluate the simulations. This is a powerful tool for
-making sure the simulations correspond to the elements of biological
-realism that are important for the intended analyses \citep{Hsieh2016a}. 
+% Andy: I'm commenting this out cause I'm not sure what it means?
 %
-That said, for some purposes it might be completely fine to simulate short sequence
-segments or even independent (unlinked) sites. However, this should be done after
-careful consideration  of the benefits of whole-chromosome simulations.
+% Finally, the whole genome sequence can provide important comparative
+% data with which to evaluate the simulations. This is a powerful tool for
+% making sure the simulations correspond to the elements of biological
+% realism that are important for the intended analyses \citep{Hsieh2016a}. 
+%
+
+% Andy: I'm commenting this out here to stay on message 
+% That said, for some purposes it might be completely fine to simulate short sequence
+% segments or even independent (unlinked) sites. However, this should be done after
+% careful consideration  of the benefits of whole-chromosome simulations.
 
 
 \hypertarget{sec3}{%
